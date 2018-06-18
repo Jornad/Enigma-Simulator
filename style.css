@@ -10,6 +10,27 @@
   cursor: pointer;
 }
 
+#rotor1 {
+  white-space: pre;
+}
+
+#rotor2 {
+  white-space: pre;
+}
+
+#rotor3 {
+  white-space: pre;
+}
+
+.rotorp {
+ padding: 5px;
+ font-size: 25px;
+ display: inline-block;
+ border-style: groove;
+ border-width: 5px;
+ border-spacing: 10px;
+}
+
 .button:hover {
   background-color: #4e4e4e;
 }
