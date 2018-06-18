@@ -45,8 +45,10 @@ document.addEventListener('keydown', function(e) {
 });
 
 document.addEventListener('keyup', function(e) {
-  spinRotor(1);
-  lightOff(e.key.toUpperCase());
+  if(rot1Pos.includes(e.key.toUpperCase())) {
+    spinRotor(1);
+    lightOff(e.key.toUpperCase());
+  }
 });
 
 function formatData() {
