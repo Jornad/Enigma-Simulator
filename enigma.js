@@ -41,10 +41,12 @@ var plugs = {
 updateRotor();
 
 document.addEventListener('keydown', function(e) {
+  if(e.target.nodeName == "INPUT") return;
   lightOn(e.key.toUpperCase());
 });
 
 document.addEventListener('keyup', function(e) {
+  if(e.target.nodeName == "INPUT") return;
   if(rot1Pos.includes(e.key.toUpperCase())) {
     spinRotor(1);
     lightOff(e.key.toUpperCase());
