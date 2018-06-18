@@ -89,7 +89,6 @@ function updateRotor() {
 function spinRotor(num) {
   for(num >= 0; num--;) {
     rot3Pos.unshift(rot3Pos.pop());
-    console.log(rot3Pos[rot3Pos.length - 1]);
     if(rot3Pos[rot3Pos.length - 1] == "Z") {
       rot2Pos.unshift(rot2Pos.pop());
       if(rot2Pos[rot2Pos.length - 1] == "Z") {
