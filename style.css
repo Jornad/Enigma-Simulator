@@ -8,6 +8,8 @@
   font-size: 12px;
   transition-duration: 0.4s;
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #rotor1 {
@@ -29,6 +31,25 @@
  border-style: groove;
  border-width: 5px;
  border-spacing: 10px;
+}
+
+.lights {
+  width: 70%;
+  margin-right:15%;
+  margin-left: 15%;
+  allign: center;
+  padding: 5px;
+  font-size: 25px;
+}
+
+.light {
+  padding: 5px;
+  font-size: 25px;
+  display: inline-block;
+  border-style: groove;
+  border-width: 5px;
+  border-spacing: 10px;
+  border-radius: 20px;
 }
 
 .button:hover {

@@ -31,7 +31,40 @@
   </div>
 
   <div class="w3-container w3-theme-d3 w3-card">
-    <canvas id="lights"></canvas>
+    <table class="lights">
+      <tr>
+        <td class="light">Q</td>
+        <td class="light">W</td>
+        <td class="light">E</td>
+        <td class="light">R</td>
+        <td class="light">T</td>
+        <td class="light">Y</td>
+        <td class="light">U</td>
+        <td class="light">I</td>
+        <td class="light">O</td>
+        <td class="light">P</td>
+      </tr>
+      <tr>
+        <td class="light">A</td>
+        <td class="light">S</td>
+        <td class="light">D</td>
+        <td class="light">F</td>
+        <td class="light">G</td>
+        <td class="light">H</td>
+        <td class="light">J</td>
+        <td class="light">K</td>
+        <td class="light">L</td>
+      </tr>
+      <tr>
+        <td class="light">Z</td>
+        <td class="light">X</td>
+        <td class="light">C</td>
+        <td class="light">V</td>
+        <td class="light">B</td>
+        <td class="light">N</td>
+        <td class="light">M</td>
+      </tr>
+    </table>
   </div>
 
   <div class="w3-container w3-theme-d4 w3-card">
@@ -40,6 +73,15 @@
 
   <div class="w3-container w3-theme-d3 w3-card">
         <canvas id="plugs"></canvas>
+  </div>
+
+  <div class="w3-container w3-theme-d4 w3-card">
+    <h2>Load Settings</h2>
+  </div>
+
+  <div class="w3-container w3-theme-d3 w3-card">
+        <input type="text" id="loadSettings"></input>
+        <button class="button" onclick="formatData()">Load</button>
   </div>
 
   <script type="text/javascript" src="./enigma.js" charset="utf-8"></script>
