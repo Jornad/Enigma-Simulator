@@ -1,6 +1,12 @@
 var rot1 = document.getElementById('rotor1');
 var rot2 = document.getElementById('rotor2');
 var rot3 = document.getElementById('rotor3');
+
+var loadMsg = document.getElementById('loadMessage');
+
+var canvas = document.getElementById("plugs");
+var ctx = canvas.getContext('2d');
+
 var loadData = document.getElementById('loadSettings');
 var lampLetA = document.getElementById('lightLetA');
 var lampLetB = document.getElementById('lightLetB');
@@ -33,12 +39,46 @@ var rot1Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", 
 var rot2Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
 var rot3Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
 
+var rot1Map = {
+  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
+  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+};
+var rot2Map = {
+  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
+  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+};
+var rot3Map = {
+  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
+  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+};
+
 var plugs = {
   A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
   N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
-}
+};
+
+canvas.width = 800;
+canvas.height = 300;
+ctx.fillStyle = "#444444";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = "#444444";
+ctx.lineWidth=10;
+ctx.rect(0, 0, canvas.width, canvas.height);
+ctx.stroke();
 
 updateRotor();
+
+rot3.addEventListener("click", function(e) {
+  spinRotor(1);
+});
+
+rot2.addEventListener("click", function(e) {
+  spinRotor(26);
+});
+
+rot1.addEventListener("click", function(e) {
+  spinRotor(676);
+});
 
 document.addEventListener('keydown', function(e) {
   if(e.target.nodeName == "INPUT") return;
@@ -54,12 +94,19 @@ document.addEventListener('keyup', function(e) {
 });
 
 function formatData() {
-  var data = loadData.value.split(",");
-  console.log(data);
-  updateData(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]), data[3]);
+  rot1Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
+  rot2Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
+  rot3Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
+  if (loadData.value.length >= 32 && loadData.value.length <= 35) {
+    var data = loadData.value.split(",");
+    updateData(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]), data[3]);
+  } else {
+    loadMsg.textContent = "Error loading data: Invalid format";
+    return;
+  }
 }
 
-function updateData(rot1Dat, rot2Dat, rot3Dat, plugs) {
+function updateData(rot1Dat, rot2Dat, rot3Dat, plugDat) {
   for(rot1Dat >= 0; rot1Dat--;) {
     rot1Pos.unshift(rot1Pos.pop());
   }
@@ -70,11 +117,37 @@ function updateData(rot1Dat, rot2Dat, rot3Dat, plugs) {
     rot3Pos.unshift(rot3Pos.pop());
   }
 
-  var plugOrder = plugs.split("");
-  console.log(plugOrder);
+  var plugOrder = plugDat.split("");
+  plugs.A = plugOrder[0];
+  plugs.B = plugOrder[1];
+  plugs.C = plugOrder[2];
+  plugs.D = plugOrder[3];
+  plugs.E = plugOrder[4];
+  plugs.F = plugOrder[5];
+  plugs.G = plugOrder[6];
+  plugs.H = plugOrder[7];
+  plugs.I = plugOrder[8];
+  plugs.J = plugOrder[9];
+  plugs.K = plugOrder[10];
+  plugs.L = plugOrder[11];
+  plugs.M = plugOrder[12];
+  plugs.N = plugOrder[13];
+  plugs.O = plugOrder[14];
+  plugs.P = plugOrder[15];
+  plugs.Q = plugOrder[16];
+  plugs.R = plugOrder[17];
+  plugs.S = plugOrder[18];
+  plugs.T = plugOrder[19];
+  plugs.U = plugOrder[20];
+  plugs.V = plugOrder[21];
+  plugs.W = plugOrder[22];
+  plugs.X = plugOrder[23];
+  plugs.Y = plugOrder[24];
+  plugs.Z = plugOrder[25];
 
   updateRotor();
   drawPlugs();
+  loadMsg.textContent = "Successfully loaded data!";
 }
 
 function updateRotor() {

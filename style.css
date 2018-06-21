@@ -14,14 +14,17 @@
 
 #rotor1 {
   white-space: pre;
+  cursor: pointer;
 }
 
 #rotor2 {
   white-space: pre;
+  cursor: pointer;
 }
 
 #rotor3 {
   white-space: pre;
+  cursor: pointer;
 }
 
 .rotorp {
