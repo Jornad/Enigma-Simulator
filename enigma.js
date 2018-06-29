@@ -4,7 +4,7 @@ var rot3 = document.getElementById('rotor3');
 
 var loadMsg = document.getElementById('loadMessage');
 
-var canvas = document.getElementById("plugs");
+var canvas = document.getElementById('plugs');
 var ctx = canvas.getContext('2d');
 
 var loadData = document.getElementById('loadSettings');
@@ -40,16 +40,20 @@ var rot2Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", 
 var rot3Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
 
 var rot1Map = {
-  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
-  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+  A: "D",B: "M",C: "T",D: "W",E: "S",F: "I",G: "L",L: "R",I: "U",J: "Y",K: "Q",L: "N",M: "K",
+  N: "F",O: "E",P: "J",Q: "C",R: "A",S: "Z",T: "B",U: "P",V: "G",W: "X",X: "O",Y: "H",Z: "V"
 };
 var rot2Map = {
-  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
-  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+  A: "H",B: "Q",C: "Z",D: "G",E: "P",F: "J",G: "T",H: "M",I: "O",J: "B",K: "L",L: "N",M: "C",
+  N: "I",O: "F",P: "D",Q: "Y",R: "A",S: "W",T: "V",U: "E",V: "U",W: "S",X: "R",Y: "K",Z: "X"
 };
 var rot3Map = {
-  A: "A",B: "B",C: "C",D: "D",E: "E",F: "F",G: "G",H: "H",I: "I",J: "J",K: "K",L: "L",M: "M",
-  N: "N",O: "O",P: "P",Q: "Q",R: "R",S: "S",T: "T",U: "U",V: "V",W: "W",X: "X",Y: "Y",Z: "Z"
+  A: "U",B: "Q",C: "N",D: "T",E: "L",F: "S",G: "Z",H: "F",I: "M",J: "R",K: "E",L: "H",M: "D",
+  N: "P",O: "X",P: "K",Q: "I",R: "B",S: "V",T: "Y",U: "G",V: "J",W: "C",X: "W",Y: "O",Z: "A"
+};
+var reflectorMap = {
+  A: "E",B: "J",C: "M",D: "Z",E: "A",F: "L",G: "Y",H: "X",I: "V",J: "B",K: "W",L: "F",M: "C",
+  N: "R",O: "Q",P: "U",Q: "O",R: "N",S: "T",T: "S",U: "P",V: "I",W: "K",X: "H",Y: "G",Z: "D"
 };
 
 var plugs = {
@@ -82,7 +86,7 @@ rot1.addEventListener("click", function(e) {
 
 document.addEventListener('keydown', function(e) {
   if(e.target.nodeName == "INPUT") return;
-  lightOn(e.key.toUpperCase());
+  crypt(e.key.toUpperCase());
 });
 
 document.addEventListener('keyup', function(e) {
@@ -92,6 +96,21 @@ document.addEventListener('keyup', function(e) {
     lightOff(e.key.toUpperCase());
   }
 });
+
+function fetchFromObject(obj, prop) {
+    if(typeof obj === 'undefined') {
+        return false;
+    }
+    var _index = prop.indexOf('.')
+    if(_index > -1) {
+        return fetchFromObject(obj[prop.substring(0, _index)], prop.substr(_index + 1));
+    }
+    return obj[prop];
+}
+
+function crypt(letter) {
+
+}
 
 function formatData() {
   rot1Pos = ["Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
@@ -166,9 +185,9 @@ function updateRotor() {
 function spinRotor(num) {
   for(num >= 0; num--;) {
     rot3Pos.unshift(rot3Pos.pop());
-    if(rot3Pos[rot3Pos.length - 1] == "Z") {
+    if(rot3Pos[0] == "R") {
       rot2Pos.unshift(rot2Pos.pop());
-      if(rot2Pos[rot2Pos.length - 1] == "Z") {
+      if(rot2Pos[0] == "F") {
         rot1Pos.unshift(rot1Pos.pop());
       }
     }
